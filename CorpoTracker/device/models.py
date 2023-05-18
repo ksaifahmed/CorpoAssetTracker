@@ -25,12 +25,3 @@ class Device(models.Model):
     # the company that owns the device
     # whichever company account adds the device is the owner
     company = models.ForeignKey('company.Company', on_delete=models.CASCADE)
-
-    # the employee that is currently using the device
-    def current_log(self):
-        DeviceLog = apps.get_model('devicelog', 'DeviceLog')
-
-        # check if 'return_at' field is null
-        # if it is, then the device is currently in use
-        # if it is not, then the device is not currently in use
-        return DeviceLog.objects.filter(device=self, return_at=None).first()

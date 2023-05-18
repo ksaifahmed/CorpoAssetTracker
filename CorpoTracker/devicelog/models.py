@@ -15,8 +15,16 @@ class DeviceLog(models.Model):
     # the date and time the device was returned
     return_at = models.DateTimeField(null=True, blank=True)
 
-    # the condition of the device when it was handed out
-    condition = models.CharField(max_length=255)
+    # status of device--> new, used, broken
+    # a choice field with 3 options
+    STATUS_CHOICES = (
+        ('new', 'new'),
+        ('used', 'used'),
+        ('broken', 'broken'),
+    )
+
+    # the status of the device when it was handed out
+    condition = models.CharField(max_length=50, choices=STATUS_CHOICES)
 
     # the condition of the device when it was returned
-    return_condition = models.CharField(max_length=255, null=True, blank=True)
+    return_condition = models.CharField(max_length=50, null=True, blank=True, choices=STATUS_CHOICES)
