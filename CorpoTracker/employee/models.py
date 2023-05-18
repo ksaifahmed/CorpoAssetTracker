@@ -7,7 +7,7 @@ from django.apps import apps
 class Employee(models.Model):
     employee_name = models.CharField(max_length=255)
     company = models.ForeignKey('company.Company', on_delete=models.CASCADE)
-
+    
     def devices(self):
         Device = apps.get_model('device', 'Device')
         return Device.objects.filter(employee=self)
